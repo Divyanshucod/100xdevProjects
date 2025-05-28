@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div id="root"></div>
+</body>
+<script>
+    const reactElement = {
+        type:'a',
+        props:{
+            children:'Go To Google',
+            href:'https://google.com/',
+            target:'_blank'
+        }
+    }
+
+    function createHtmlElement(reactElement){
+        const {type,props} = reactElement;
+        const element = document.createElement(type);
+
+        for(const key in props){
+            if(key === 'children'){
+                element.innerHTML = props[key]
+            }
+            else{
+                element.setAttribute(key,props[key]);
+            }
+        }
+        return element;
+    }
+    function customRenderer(ElementObject,rootId){
+        const element = createHtmlElement(ElementObject);
+        const root = document.getElementById(rootId);
+        root.appendChild(element);
+    }
+    customRenderer(reactElement,'root')
+</script>
+</html>
